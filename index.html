@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Word Scramble Game</title>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Word Scramble</h2>
+      <div class="content">
+        <p id="scrambleWord"></p>
+        <div class="details">
+          <p id="chooseLevel">Choose a Level :</p>
+          <p id="hintParagraph">Hint: <span id="hint"></span></p>
+          <p id="timeParagraph">Time Left: <b id="timer"></b>s</p>
+        </div>
+        <input
+          type="text"
+          spellcheck="false"
+          placeholder="Enter a valid word"
+          id="inputWord"
+        />
+        <div class="buttons">
+          <button id="refreshWord">Refresh Word</button>
+          <button id="checkWord">Check Word</button>
+        </div>
+        <div id="score"></div>
+        <div class="buttons">
+          <button id="playAgain">Play Again</button>
+          <button id="newLevel">Another Level</button>
+        </div>
+
+        <div class="buttons">
+          <button id="Easy" class="btn-success">Easy Level</button>
+          <button id="Hard">Hard Level</button>
+        </div>
+      </div>
+    </div>
+    <script src="js/app.js"></script>
+    <script src="js/words.js"></script>
+  </body>
+</html>
