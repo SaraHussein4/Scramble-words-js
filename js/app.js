@@ -25,8 +25,6 @@ let pageInitialization = (list) => {
 //#endregion
 
 
-
-
 let myInterval;
 
 
@@ -35,14 +33,15 @@ let changeTimer = () => {
   let lblTimer = parseInt(timer.innerHTML);
   if (lblTimer <= 0) {
     clearInterval(myInterval);
-    scoreDiv.innerHTML = "your score is " + score.length;
+    scoreDiv.innerHTML = "The Score is " + score.length;
     scoreDiv.style.display = "block"
     playAgain.style.display = "block";
     newLevel.style.display = "block"
     checkWord.style.display = "none";
     refreshWord.style.display = "none";
     inputWord.style.display="none";
-  
+    notRight.style.display ="none";
+    right.style.display ="none";
   } else {
     timer.innerHTML = lblTimer - 1;
   }
@@ -63,7 +62,7 @@ let nextWord = (list) => {
 //#region start a countdown
 let startTimer = () => {
   clearInterval(myInterval); 
-  timer.innerHTML = 60;
+  timer.innerHTML = 15;
   myInterval = setInterval(changeTimer, 1000);
 };
 //#endregion
@@ -91,6 +90,9 @@ window.addEventListener("DOMContentLoaded", () => {
  const hintParagraph = document.getElementById("hintParagraph");
  const timeParagraph = document.getElementById("timeParagraph");
  const chooseLevel = document.getElementById("chooseLevel");
+//  const result = document.getElementById("result");
+const right = document.getElementById("right");
+const notRight = document.getElementById("notRight");
  refreshWord.style.display ="none"
  checkWord.style.display="none"
   
@@ -106,6 +108,8 @@ if(Easy){
         conTimer();
         nextWord(easyWords);
         document.getElementById("inputWord").value = "";
+        notRight.style.display ="none";
+        right.style.display ="none";
 
       });
     }
@@ -113,35 +117,43 @@ if(Easy){
 
     if (checkWord) {
 
-      let fun =() =>{
+    
       checkWord.addEventListener("click", (e) => {
         e.preventDefault();
         inputWord1 = inputWord.value;
-        if (inputWord1.toLowerCase() === unscrambledWord.toLowerCase()) {
-          alert("Congratulations!");
+        if (inputWord1.toLowerCase().trim() === unscrambledWord.toLowerCase()) {
+          // alert("Congratulations!");
+          right.style.display ="block"
+          notRight.style.display ="none"
+          // result.innerHTML="right"
           clearInterval(myInterval); // Clear the interval
           nextWord(easyWords);
           conTimer();
           score.push(inputWord1);
+          scoreDiv.innerHTML = "score =" + score.length;
+          scoreDiv.style.display="block"
         } else {
           conTimer()
-          alert("Nope! Try again.");
+          // result.innerHTML="not right"
+          right.style.display ="none"
+          notRight.style.display="block"
+          // alert("Nope! Try again.");
+          
         }
         document.getElementById("inputWord").value = "";
       });
-    }
-    fun()
+    
+ 
   }
 if(playAgain){
-  playAgain.addEventListener("click" , ()=>{
-    // scoreDiv.style.display = "block"; 
+  playAgain.addEventListener("click" , ()=>{ 
     pageInitialization(easyWords);
-   
+    document.getElementById("inputWord").value = "";
     clearInterval(myInterval);
     startTimer();
     score = [];
-    // location.reload()
-   
+    notRight.style.display ="none";
+      right.style.display ="none";   
   })
 }
 
@@ -160,23 +172,28 @@ if(Hard){
         conTimer();
         nextWord(hardwords);
         document.getElementById("inputWord").value = "";
+        notRight.style.display ="none";
+        right.style.display ="none";
       });
     }
 
     if (checkWord) {
       checkWord.addEventListener("click", (e) => {
         e.preventDefault();
-        let inputWord = document.getElementById("inputWord").value.toLowerCase();
-        if (inputWord === unscrambledWord.toLowerCase()) {
-          alert("Congratulations! ");
+        let inputWord = document.getElementById("inputWord").value;
+        if (inputWord.toLowerCase().trim() === unscrambledWord.toLowerCase()) {
+          right.style.display ="block"
+          notRight.style.display ="none"
           clearInterval(myInterval); 
           nextWord(hardwords);
           conTimer();
           score.push(inputWord);
-          console.log(score);
+          scoreDiv.innerHTML = "score =" + score.length;
+          scoreDiv.style.display="block";
         } else {
           conTimer()
-          alert("Nope! Try again.");
+          right.style.display ="none"
+          notRight.style.display="block"
         }
         document.getElementById("inputWord").value = "";
       });
@@ -188,6 +205,9 @@ if(playAgain){
     clearInterval(myInterval);
     startTimer();
     score = [];
+    notRight.style.display ="none";
+    right.style.display ="none";
+    document.getElementById("inputWord").value = "";
   })
 }
 

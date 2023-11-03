@@ -81,6 +81,32 @@ body {
 #inputWord{
   display: none;
 }
+#right{
+  text-align: center;
+  position: relative;
+  font-size: 40px;
+  color: green;
+  animation: animate 1s normal;
+  z-index: 2;
+  display: none;
+}
+#notRight{
+  text-align: center;
+  position: relative;
+  font-size: 40px;
+  color:red;
+  animation: animate 1s normal;
+  z-index: 2;
+  display: none;
+}
+@keyframes animate {
+  0% {
+    font-size: 0;
+  }
+  100% {
+    font-size: 40px;
+  }
+}
 .buttons button {
   border: none;
   outline: none;
